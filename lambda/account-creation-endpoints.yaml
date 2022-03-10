@@ -1,0 +1,28 @@
+openapi: 3.0.1
+info:
+  version: "1.0.0"
+  title: "Config API"
+x-amazon-apigateway-request-validators: 
+  all:
+    validateRequestBody: false
+    validateRequestParameters: false
+x-amazon-apigateway-gateway-responses:
+  BAD_REQUEST_BODY:
+    statusCode: 400
+paths:
+  /create-account:
+    post:
+      summary: Creates a new account
+      operationId: account-creation
+      responses:
+        '200':
+          description: OK
+      x-amazon-apigateway-request-validator: all
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        # Replace AWS_REGION and ACCOUNT_ID in uri
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${account_creation_lambda_arn}/invocations"
+        responses:
+          default:
+            statusCode: 200
