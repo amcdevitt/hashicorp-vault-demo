@@ -9,6 +9,7 @@ fi
 echo "Running build for environment: $environment"
 
 rootDir=$(pwd)
+echo "Root directory: $rootDir"
 
 # Terraform
 tf_wd=infrastructure
@@ -19,7 +20,8 @@ tf_logging_level=DEBUG
 
 # Lambda
 lambda_root=lambda
-lambda_tf_template=lambda-zip-s3-upload.template
+lambda_upload_tf_template=$rootDir/$tf_wd/template/lambda-zip-s3-upload.template
+lambda_tf_template=$rootDir/$tf_wd/template/lambda-base.template
 
 BUILD_VARS_FILE=build-vars-override.sh
 if test -f "$BUILD_VARS_FILE"; then

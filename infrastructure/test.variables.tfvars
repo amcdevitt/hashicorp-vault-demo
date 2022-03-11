@@ -28,3 +28,11 @@ vault_demo_security_group_name = "vault-demo-security-group"
 #####################################
 vault_demo_subnet_cidr = "10.0.0.0/16"
 vault_demo_subnet_name = "vault-demo-subnet"
+
+
+# Variables from file: test-function_lambda.tf
+#####################################
+test-function_function_name            = "test-function"
+test-function_function_handler         = "test-function.handler"
+test-function_function_timeout_seconds = 60
+test-function_function_memory_size_mb  = 128

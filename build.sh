@@ -1,6 +1,6 @@
 #!/usr/bin/bash -v
 set -e
-source build-vars.sh
+source scripts/build-vars.sh
 
 mkdir -p $rootDir/build
 
@@ -10,7 +10,7 @@ npm run esbuild
 
 # Zip up the lambda code
 cd $rootDir
-./zip-lambdas.sh
+scripts/zip-lambdas.sh $environment
 
 # Terraform
 cd $rootDir/$tf_wd

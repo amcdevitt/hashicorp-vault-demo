@@ -1,6 +1,6 @@
 #!/usr/bin/bash -v
 set -e
-source build-vars.sh
+source scripts/build-vars.sh
 
 export TF_LOG=$tf_logging_level
 
