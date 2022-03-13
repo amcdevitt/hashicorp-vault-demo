@@ -4,7 +4,7 @@
   "description": "Sprocket account creation",
   "main": "test-function.ts",
   "scripts": {
-    "esbuild": "rm -rf build && node ./esbuild.js",
+    "esbuild": "rm -rf build && node ./esbuild-lambda.js",
     "lint": "eslint --ext .ts .",
     "lint-fix": "eslint --fix --ext .ts .",
     "test": "jest",

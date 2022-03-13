@@ -1,0 +1,28 @@
+{
+    "lambdas": [
+        {
+            "name": "exampleFunction",
+            "esbuildEntrypoint": "src/functions/test-function.ts",
+            "additionalFiles": [
+                "support-files/example-file.txt",
+                "support-files/example-file.json"
+            ]
+        },
+        {
+            "name": "anotherFunction",
+            "esbuildEntrypoint": "src/functions/test-function.ts",
+            "additionalFiles": [
+                "support-files/example-file.txt",
+                "support-files/example-file.json"
+            ]
+        },
+        {
+            "name": "test-function",
+            "esbuildEntrypoint": "src/functions/test-function.ts",
+            "additionalFiles": [
+                "support-files/example-file.txt",
+                "support-files/example-file.json"
+            ]
+        }
+    ]
+}

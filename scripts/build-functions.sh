@@ -26,3 +26,19 @@ add_variables_to_tfvars() {
         >> $file_to_write_variables_to
     fi
 }
+
+generate_manifest_file() {
+    local folder_to_read=$1
+    local character_count=`echo $folder_to_read | wc -c`
+    local manifest_file_name="manifest.txt"
+
+    echo "Arguments to $0: $folder_to_read, $character_count"
+
+    rm $folder_to_read/$manifest_file_name 2> /dev/null
+
+    find $folder_to_read -name "*" -type f \
+    | cut -c $character_count- \
+    | sed "s/^\///" \
+    | sed "/$manifest_file_name/d" \
+    >> $folder_to_read/$manifest_file_name
+}

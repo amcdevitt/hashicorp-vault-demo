@@ -36,3 +36,19 @@ test-function_function_name            = "test-function"
 test-function_function_handler         = "test-function.handler"
 test-function_function_timeout_seconds = 60
 test-function_function_memory_size_mb  = 128
+
+
+# Variables from file: exampleFunction_lambda.tf
+#####################################
+exampleFunction_function_name            = "exampleFunction"
+exampleFunction_function_handler         = "exampleFunction.handler"
+exampleFunction_function_timeout_seconds = 60
+exampleFunction_function_memory_size_mb  = 128
+
+
+# Variables from file: anotherFunction_lambda.tf
+#####################################
+anotherFunction_function_name            = "anotherFunction"
+anotherFunction_function_handler         = "anotherFunction.handler"
+anotherFunction_function_timeout_seconds = 60
+anotherFunction_function_memory_size_mb  = 128

@@ -22,6 +22,7 @@ tf_logging_level=DEBUG
 lambda_root=lambda
 lambda_upload_tf_template=$rootDir/$tf_wd/template/lambda-zip-s3-upload.template
 lambda_tf_template=$rootDir/$tf_wd/template/lambda-base.template
+build_config_file=$rootDir/$lambda_root/build-config.json
 
 BUILD_VARS_FILE=build-vars-override.sh
 if test -f "$BUILD_VARS_FILE"; then

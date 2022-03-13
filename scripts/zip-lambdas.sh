@@ -6,40 +6,45 @@ source scripts/build-functions.sh
 lambda_upload_tf_file=lambda-upload.tf
 
 rm -rf $rootDir/build/*
-cd $rootDir/$lambda_root/build
+
+lambda_build_dir=$rootDir/$lambda_root/build
+cd $lambda_build_dir
 
 echo "" > $rootDir/build/$lambda_upload_tf_file
 
-for FILE in *; do 
+for config in $(cat "../build-config.json" | jq -rc '.lambdas[]'); do
 
-    if [[ $FILE == *"js" ]]; then
-        
-        file_name="${FILE%.*}"
-        echo "zip base name: $file_name"
+    lambda_name=`echo ${config} | jq -r '.name'`
+    echo "Building lambda zip: $lambda_name ..."
 
-        zip "$file_name.zip" "$file_name.js" "$file_name.js.map"
+    echo "Current directory: $(pwd)"
+    cd "$lambda_name"
 
-        mv "$file_name.zip" "$rootDir/build/"
+    echo "zip base name: $lambda_name"
 
-        # Add the zip file to the terraform file
-        cat $lambda_upload_tf_template | sed s/{{zip_name}}/$file_name/g >> $rootDir/build/$lambda_upload_tf_file
-        printf "\n\n" >> $rootDir/build/$lambda_upload_tf_file
+    zip -r "$lambda_name.zip" .
 
-        # If the lambda terraform file does not exist, write it out
-        lambda_generated_file="$rootDir/build/lambda-${file_name}.tf"
-        lambda_template_replace_variables_and_write_file "$lambda_tf_template" "$lambda_generated_file" "$file_name" "$file_name"
+    mv "$lambda_name.zip" "$rootDir/build/"
 
-        if [ ! -f "$rootDir/$tf_wd/${file_name}_lambda.tf" ]; then
-            echo "Writing out lambda terraform file: $rootDir/$tf_wd/${file_name}_lambda.tf"
-            output_generated_file=$rootDir/$tf_wd/${file_name}_lambda.tf
-            mv $lambda_generated_file $output_generated_file
+    # Add the zip file to the terraform file
+    cat $lambda_upload_tf_template | sed s/{{zip_name}}/$lambda_name/g >> $rootDir/build/$lambda_upload_tf_file
+    printf "\n\n" >> $rootDir/build/$lambda_upload_tf_file
 
-            # Add the variables to the tfvars file
-            add_variables_to_tfvars "$output_generated_file" "$rootDir/$tf_wd/$tf_vars_file"
-        fi
+    # If the lambda terraform file does not exist, write it out
+    lambda_generated_file="$rootDir/build/lambda-${lambda_name}.tf"
+    lambda_template_replace_variables_and_write_file "$lambda_tf_template" "$lambda_generated_file" "$lambda_name" "$lambda_name"
 
-        continue
+    output_generated_file=$rootDir/$tf_wd/${lambda_name}_lambda.tf
+    if [ ! -f "$output_generated_file" ]; then
+        echo "Writing out lambda terraform file: $output_generated_file"
+        mv $lambda_generated_file $output_generated_file
+
+        # Add the variables to the tfvars file
+        add_variables_to_tfvars "$output_generated_file" "$rootDir/$tf_wd/$tf_vars_file"
     fi
+
+    cd ..
+    continue
 
 done
 
