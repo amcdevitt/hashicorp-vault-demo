@@ -45,6 +45,7 @@ export const handler = async (event: any, context: Context): Promise<APIGatewayP
     const secret = await vault.read('aws/config/root');
 
     logger.info({secret: secret}, "Secret");
+    
   }
   catch (ex) {
     logger.error({ex: ex}, "Error");

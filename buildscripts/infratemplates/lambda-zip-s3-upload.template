@@ -1,0 +1,12 @@
+resource "aws_s3_object" "{{lambda_name}}_lambda" {
+  bucket = aws_s3_bucket.lambda_archive_and_upload.id
+
+  key    = "lambda/{{lambda_name}}.zip"
+  source = "../build/{{lambda_name}}.zip"
+
+  etag = filemd5("../build/{{lambda_name}}.zip")
+  tags = {
+    Hash = filemd5("../build/{{lambda_name}}.zip")
+    Purpose = var.global_tag_purpose
+  }
+}

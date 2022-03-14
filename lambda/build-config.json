@@ -1,4 +1,8 @@
 {
+    "project": {
+        "name": "Vault Test",
+        "prefix": "vlt"
+    },
     "lambdas": [
         {
             "name": "exampleFunction",
@@ -17,11 +21,10 @@
             ]
         },
         {
-            "name": "test-function",
+            "name": "vault_test",
             "esbuildEntrypoint": "src/functions/test-function.ts",
             "additionalFiles": [
-                "support-files/example-file.txt",
-                "support-files/example-file.json"
+                "support-files/example-file.txt"
             ]
         }
     ]
