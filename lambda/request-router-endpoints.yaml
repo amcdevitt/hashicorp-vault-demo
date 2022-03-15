@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   version: "1.0.0"
-  title: "Config API"
+  title: "Router API"
 x-amazon-apigateway-request-validators: 
   all:
     validateRequestBody: false
@@ -10,10 +10,10 @@ x-amazon-apigateway-gateway-responses:
   BAD_REQUEST_BODY:
     statusCode: 400
 paths:
-  /create-account:
+  /forward-to/{proxy+}:
     post:
-      summary: Creates a new account
-      operationId: account-creation
+      summary: Forwards the request to the specified endpoint
+      operationId: forward-post
       responses:
         '200':
           description: OK
@@ -22,7 +22,7 @@ paths:
         type: "aws_proxy"
         httpMethod: "POST"
         # Replace AWS_REGION and ACCOUNT_ID in uri
-        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${account_creation_lambda_arn}/invocations"
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${router_lambda}/invocations"
         responses:
           default:
             statusCode: 200

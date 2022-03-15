@@ -8,6 +8,10 @@ default_log_retention_days = 7
 environment                = "dev"
 global_tag_purpose         = "vault-test"
 
+# Build
+#####################################
+lambda_root_dir = "lambda"
+
 # Account Creation lambda
 #####################################
 vault_test_function_name            = "test-function"
@@ -30,17 +34,18 @@ vault_demo_subnet_cidr = "10.0.0.0/16"
 vault_demo_subnet_name = "vault-demo-subnet"
 
 
-# Variables from file: lambda-exampleFunction.tf
+# Variables from file: lambda-request-router.tf
 #####################################
-exampleFunction_function_name            = "vlt-exampleFunction"
-exampleFunction_function_handler         = "exampleFunction.handler"
-exampleFunction_function_timeout_seconds = 60
-exampleFunction_function_memory_size_mb  = 128
+request-router_function_name            = "vlt-request-router"
+request-router_function_handler         = "request-router.handler"
+request-router_function_timeout_seconds = 60
+request-router_function_memory_size_mb  = 128
+request_router_swagger_file             = "request-router-endpoints.yaml"
 
 
-# Variables from file: lambda-anotherFunction.tf
+# Variables from file: lambda-example-lambda.tf
 #####################################
-anotherFunction_function_name            = "vlt-anotherFunction"
-anotherFunction_function_handler         = "anotherFunction.handler"
-anotherFunction_function_timeout_seconds = 60
-anotherFunction_function_memory_size_mb  = 128
+example-lambda_function_name            = "vlt-example-lambda"
+example-lambda_function_handler         = "example-lambda.handler"
+example-lambda_function_timeout_seconds = 90
+example-lambda_function_memory_size_mb  = 128

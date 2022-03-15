@@ -5,20 +5,8 @@
     },
     "lambdas": [
         {
-            "name": "exampleFunction",
-            "esbuildEntrypoint": "src/functions/test-function.ts",
-            "additionalFiles": [
-                "support-files/example-file.txt",
-                "support-files/example-file.json"
-            ]
-        },
-        {
-            "name": "anotherFunction",
-            "esbuildEntrypoint": "src/functions/test-function.ts",
-            "additionalFiles": [
-                "support-files/example-file.txt",
-                "support-files/example-file.json"
-            ]
+            "name": "request-router",
+            "esbuildEntrypoint": "src/functions/request-router.ts"
         },
         {
             "name": "vault_test",
@@ -26,6 +14,10 @@
             "additionalFiles": [
                 "support-files/example-file.txt"
             ]
+        },
+        {
+            "name": "example-lambda",
+            "esbuildEntrypoint": "src/functions/example-lambda.ts"
         }
     ]
 }

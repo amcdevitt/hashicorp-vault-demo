@@ -1,26 +1,13 @@
 
-resource "aws_s3_object" "exampleFunction_lambda" {
+resource "aws_s3_object" "request-router_lambda" {
   bucket = aws_s3_bucket.lambda_archive_and_upload.id
 
-  key    = "lambda/exampleFunction.zip"
-  source = "../build/exampleFunction.zip"
+  key    = "lambda/request-router.zip"
+  source = "../build/request-router.zip"
 
-  etag = filemd5("../build/exampleFunction.zip")
+  etag = filemd5("../build/request-router.zip")
   tags = {
-    Hash    = filemd5("../build/exampleFunction.zip")
-    Purpose = var.global_tag_purpose
-  }
-}
-
-resource "aws_s3_object" "anotherFunction_lambda" {
-  bucket = aws_s3_bucket.lambda_archive_and_upload.id
-
-  key    = "lambda/anotherFunction.zip"
-  source = "../build/anotherFunction.zip"
-
-  etag = filemd5("../build/anotherFunction.zip")
-  tags = {
-    Hash    = filemd5("../build/anotherFunction.zip")
+    Hash    = filemd5("../build/request-router.zip")
     Purpose = var.global_tag_purpose
   }
 }
@@ -34,6 +21,19 @@ resource "aws_s3_object" "vault_test_lambda" {
   etag = filemd5("../build/vault_test.zip")
   tags = {
     Hash    = filemd5("../build/vault_test.zip")
+    Purpose = var.global_tag_purpose
+  }
+}
+
+resource "aws_s3_object" "example-lambda_lambda" {
+  bucket = aws_s3_bucket.lambda_archive_and_upload.id
+
+  key    = "lambda/example-lambda.zip"
+  source = "../build/example-lambda.zip"
+
+  etag = filemd5("../build/example-lambda.zip")
+  tags = {
+    Hash    = filemd5("../build/example-lambda.zip")
     Purpose = var.global_tag_purpose
   }
 }

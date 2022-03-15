@@ -20,15 +20,17 @@ for (let lambdaConfig of buildConfig.lambdas) {
     console.log(`Building with options: ${JSON.stringify(esbuildOptions)}`);
     esbuild.build(esbuildOptions).catch(() => process.exit(1));
 
-    for (let addnlFile of lambdaConfig.additionalFiles) {
-        let filePath = addnlFile.substring(0, addnlFile.lastIndexOf('/'));
-        filePath = `./${esbuildOptions.outdir}/${filePath}`;
-        if (!fs.existsSync(filePath)) {
-            fs.mkdirSync(filePath, {
-                recursive: true
-            });
+    if(lambdaConfig.additionalFiles) {
+        for (let addnlFile of lambdaConfig.additionalFiles) {
+            let filePath = addnlFile.substring(0, addnlFile.lastIndexOf('/'));
+            filePath = `./${esbuildOptions.outdir}/${filePath}`;
+            if (!fs.existsSync(filePath)) {
+                fs.mkdirSync(filePath, {
+                    recursive: true
+                });
+            }
+            fs.copyFileSync(`./${addnlFile}`, `${esbuildOptions.outdir}/${addnlFile}`);
         }
-        fs.copyFileSync(`./${addnlFile}`, `${esbuildOptions.outdir}/${addnlFile}`);
     }
 
     esbuildOptions.entryPoints = undefined;

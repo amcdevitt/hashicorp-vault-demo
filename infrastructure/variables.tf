@@ -39,6 +39,11 @@ variable "global_tag_purpose" {
   type        = string
 }
 
+# Build
+#####################################
+variable "lambda_root_dir" {
+  type = string
+}
 
 # Account Creation lambda
 #####################################
@@ -87,4 +92,10 @@ variable "vault_demo_subnet_cidr" {
 variable "vault_demo_subnet_name" {
   description = "Name of the default subnet"
   type        = string
+}
+
+# Request Router Lambda
+#####################################
+variable "request_router_swagger_file" {
+  type = string
 }

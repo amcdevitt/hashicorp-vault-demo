@@ -24,7 +24,7 @@ tf_wd=infrastructure
 tf_plan="$project_name-plan.out"
 tf_backend_file="$environment.backend.tfvars"
 tf_vars_file="$environment.variables.tfvars"
-tf_logging_level=DEBUG
+tf_logging_level=INFO
 
 # Lambda
 lambda_root=lambda
